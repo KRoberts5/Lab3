@@ -118,14 +118,17 @@ public class MainActivity extends AppCompatActivity {
         EditText input = (EditText)findViewById(R.id.playerInput);
         CharSequence characters = input.getText();
 
-        char letter = characters.charAt(0);
+        if(characters.length() > 0) {
+            char letter = characters.charAt(0);
 
-        if(Character.isLetter(letter)){
-            letter = Character.toUpperCase(letter);
+            if (Character.isLetter(letter)) {
+                letter = Character.toUpperCase(letter);
 
-            if(unscrambledWord.charAt(correctLetters) == letter)
-                addLetter(letter);
-            else
+                if (unscrambledWord.charAt(correctLetters) == letter)
+                    addLetter(letter);
+                else
+                    ++incorrectGuesses;
+            } else
                 ++incorrectGuesses;
         }
         else
@@ -133,6 +136,7 @@ public class MainActivity extends AppCompatActivity {
 
         updateOutput();
         checkForWin();
+
     }
 
     private void addLetter(char letter){
